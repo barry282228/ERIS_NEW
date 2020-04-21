@@ -6,6 +6,8 @@ import pandas as pd
 #import matplotlib.pyplot as plt
 import datetime
 
+testandtry
+
 args = sys.argv[1:]
 def usage():
     print("Usage:{0} [-h name | --host=name] [-P # | --port=#] [-u name | --user=name] [-p password | --password=password] [-m mmcode | --mmcode=name] [-? | --help]".format(sys.argv[0]))
