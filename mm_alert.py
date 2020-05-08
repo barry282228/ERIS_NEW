@@ -107,7 +107,10 @@ while today >= min(trydata["time"]):
 db = pymysql.connect(host=host, user=user, passwd=passwd, db='erp_db')
 cursor = db.cursor()
 
-sql = """SELECT mm_stock_comb, mm_recommend
+sql = """SELECT 
+mm_stock_comb,
+mm_recommend,
+mm_safety_stock_max
 FROM mm_material_base
 WHERE mm_no_gp = %s
 """
@@ -138,8 +141,7 @@ if trydata.at[0,'mmlevel'] =="S" or trydata.at[0,'mmlevel'] =="A" or trydata.at[
 
     #changelist = (float(round(np.mean(a)+np.std(a)*3.08,0)),float(round(2*np.mean(a)+np.std(a)*3.08,0)),float(round(np.mean(a)+np.std(a)*3.08+max(a),0)-stock),mmcode)
     #cursor.execute(sql,changelist)
-    changelist = (float(round(np.mean(a)+np.std(a)*3.08,0)),float(round(2*np.mean(a)+np.std(a)*3.08,0)),buy,round(buy/np.mean(a[0:12])))
-    print(changelist)
+    changelist = [float(round(np.mean(a)+np.std(a)*3.08,0)),float(round(2*np.mean(a)+np.std(a)*3.08,0)),buy,round(buy/np.mean(a[0:12]))]
 else:
     buy = float(round(np.mean(a)+np.std(a)*1.65+max(a),0)-stock)
     if stock >= float(round(2*np.mean(a)+np.std(a)*1.65,0)):
@@ -155,5 +157,13 @@ else:
 
     #changelist = (float(round(np.mean(a)+np.std(a)*3.08,0)),float(round(2*np.mean(a)+np.std(a)*3.08,0)),float(round(np.mean(a)+np.std(a)*3.08+max(a),0)-stock),mmcode)
     #cursor.execute(sql,changelist)
-    changelist = (float(round(np.mean(a)+np.std(a)*1.65,0)),float(round(2*np.mean(a)+np.std(a)*1.65,0)),buy,round(buy/np.mean(a[0:12])))
-    print(changelist)
+    changelist = [float(round(np.mean(a)+np.std(a)*1.65,0)),float(round(2*np.mean(a)+np.std(a)*1.65,0)),buy,round(buy/np.mean(a[0:12]))]
+
+if numbers[2][0] != 0:
+    mm_rop_max = numbers[2][0]-1
+    mm_propose_max = numbers[2][0]-stock
+    changelist.append(mm_rop_max,mm_propose_max)
+else:
+    changelist.append(0,0)
+
+print(changelist)
