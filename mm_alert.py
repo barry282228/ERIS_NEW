@@ -166,4 +166,5 @@ if numbers[2][0] != 0:
 else:
     changelist.append(0,0)
 
+
 print(changelist)
