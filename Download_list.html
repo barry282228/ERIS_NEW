@@ -1,0 +1,8 @@
+file numbers: {{len_file}}<br><a href="../">Return</a><hr>
+{% for i in f_list %}
+{{i}}<br>
+<a href="/download/{{i}}"> Download </a>
+<a href="/delete/{{i}}"> Delete </a>
+<br>
+<hr>
+{% endfor %}
