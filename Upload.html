@@ -1,0 +1,26 @@
+<!doctype html>
+<title>FOR QC TEAM</title>
+<h2>本頁面可整理 DAT檔 or ZIP檔 成可以匯入JMP的格式</h2>
+<h3>請將全部檔案壓縮成一個ZIP檔再匯入</h3>
+<p>
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+		<ul class=flashes>
+		{% for message in messages %}
+		  <li>{{ message }}</li>
+		{% endfor %}
+		</ul>
+	  {% endif %}
+	{% endwith %}
+</p>
+<form method="post" action="/" enctype="multipart/form-data">
+    <dl>
+		<p>
+			<input type="file" name="myfile" autocomplete="off" required>
+		</p>
+    </dl>
+    <p>
+		<input type="submit" value="Submit">
+	</p>
+</form>
+<a href="download">檔案列表</a>
