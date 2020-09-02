@@ -1,0 +1,12 @@
+系統檔案數: {{len_file}}<br><a href="../">返回上傳頁面</a><hr>
+{% for i in f_list %}
+{{i}}
+<a>&nbsp;</a>
+<a> {{f_list[i]}} </a>
+<br>
+<a href="/download/{{i}}"> Download </a>
+<a>&nbsp;</a>
+<a href="/delete/{{i}}"> Delete </a>
+<br>
+<hr>
+{% endfor %}
